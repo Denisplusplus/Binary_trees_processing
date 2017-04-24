@@ -6,7 +6,11 @@ int level_max(Node *tree, int deep);
 int level_nodes_amount(Node *tree, int curr, int desired);
 int max_quantity_nodes(Node *tree);
 int max_quantity_nodes(Node *tree);
+
 void tree_print(Node *tree);
-void tree_add_node(Node **tree, int value);
+void tree_add_node(Node **root, int value);
+void help();
+
+Node* tree_delete_node(Node *root, int value);
 
 #endif
