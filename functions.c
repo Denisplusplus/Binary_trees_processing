@@ -39,7 +39,7 @@ int max_quantity_nodes(Node *tree)
 
 void level_with_max_nodes_amount(Node *tree)
 {	
-	printf("Level(s) with maximal quantity of nodes:\n");
+	printf("\nLevel(s) with maximal quantity of nodes:\n");
 	int max_level    = level_max(tree, DEEP);
 	int max_quantity = max_quantity_nodes(tree);
 	for (int level = 0; level < max_level; level++){
@@ -70,6 +70,49 @@ void destroy(Node *tree)
 }
 
 
+int rightmost(Node *root)
+{
+    while (root->node_right != NULL) {
+        root = root->node_right;
+    }
+    
+    return root->data;
+}
+
+
+Node* tree_delete_node(Node *root, int value)
+{
+    if (NULL == root) return NULL;
+    if (root->data == value) {
+        if (NULL == root->node_left && NULL == root->node_right) {
+            free(root);
+            return NULL;
+        }
+        if (NULL == root->node_right && root->node_left != NULL) {
+            Node *temp = root->node_left;
+            free(root);
+            return temp;
+        }
+        if (NULL == root->node_left && root->node_right != NULL) {
+            Node *temp = root->node_right;
+            free(root);
+            return temp;
+        }
+        root->data = rightmost(root->node_left);
+        root->node_left = tree_delete_node(root->node_left, root->data);
+        return root;
+    }
+    if (value < root->data) {
+        root->node_left = tree_delete_node(root->node_left, value);
+        return root;
+    }
+    if (value > root->data) {
+        root->node_right = tree_delete_node(root->node_right, value);
+        return root;
+    }
+    return root;
+}
+
 void tree_add_node(Node **tree, int value)
 {
     Node *new = NULL;
@@ -89,4 +132,17 @@ void tree_add_node(Node **tree, int value)
         tree_add_node(&(*tree)->node_right, value);
     }
     free(new);
+}
+
+
+void help()
+{
+    printf("The purpose of this app is processing of binary trees. \n");
+    printf("Use this keys to work with the program: \n");
+    printf("- 'add' - to insert the node \n");
+    printf("- 'delete' - to delete the node \n");
+    printf("- 'print' - to print the binary tree \n");
+    printf("- 'destroy' - to delete the binary tree \n");
+    printf("- 'task' - to start finding the level(s) with the maximal quantity of the nodes\n");
+    printf("- 'exit' or 'quit' - to quit application\n");
 }
