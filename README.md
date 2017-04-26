@@ -9,7 +9,7 @@ Determine the level of a binary tree with the max number of vertices.
   * Print the tree
   * Find the level(s) with the maximal quantity of the nodes (task)
 ### Description of solution the task:
-##### Realise these functions:
+##### Realize these functions:
 1) level_nodes_amount - function, that finds the amount of vertices in demanded level
 2) level_max - function, that finds maximal level (using the dfs)
 3) max_quantity_nodes - function, that finds the maximal quantity of the nodes
